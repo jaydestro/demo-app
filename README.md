@@ -1,2 +1,1 @@
-# demo-app
-simple demo "Hello World" for nodejs
+# Simple Express / Node.js hello world app
