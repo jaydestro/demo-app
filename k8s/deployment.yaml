@@ -14,7 +14,7 @@ spec:
       spec:
         containers:
         - name: demo-app
-          image:  jagorddemoappacr.azurecr.io/demo-app:v1
+          image:  ACRHERE.azurecr.io/demo-app:v1
           imagePullPolicy: Always
           readinessProbe:
             httpGet:
