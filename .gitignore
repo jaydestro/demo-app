@@ -62,3 +62,6 @@ typings/
 
 #mac stuff
 .DS_Store
+
+# npmrc
+.npmrc
