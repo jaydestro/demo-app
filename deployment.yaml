@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-app
+spec:
+  selector:
+      matchLabels:
+        app: demo-app
+  replicas: 1
+  template:
+      metadata:
+        labels:
+            app: demo-app
+      spec:
+        containers:
+        - name: demo-app
+          image:  jagorddemoappacr.azurecr.io/demo-app:v1
+          imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              port: 8000
+              path: /
+          livenessProbe:
+            httpGet:
+              port: 8000
+              path: /
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
