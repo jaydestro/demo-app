@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: "jayaksdemo-8abb"
+    labels:
+        app: "jayaksdemo-8abb"
+    annotations:
+        kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+    rules:
+        - host: default-jayaksdemo-8abb.ffb5f58b35324082b949.eastus.aksapp.io
+          http:
+            paths:
+            - path: /
+              backend:
+                serviceName: "jayaksdemo-8abb"
+                servicePort: 8000
