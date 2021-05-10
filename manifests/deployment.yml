@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "fbmondayaks-c6a7"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "fbmondayaks-c6a7"
+  template:
+    metadata:
+      labels:
+        app: "fbmondayaks-c6a7"
+    spec:
+      containers:
+        - name: "fbmondayaks-c6a7"
+          image: "fbmondayacr.azurecr.io/fbmondayaks"
+          ports:
+          - containerPort: 8000
