@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: "fbmondayaks-c6a7"
+    labels:
+        app: "fbmondayaks-c6a7"
+    annotations:
+        kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+    rules:
+        - host: default-fbmondayaks-c6a7.36cfd58b4fa54059a235.eastus.aksapp.io
+          http:
+            paths:
+            - path: /
+              backend:
+                serviceName: "fbmondayaks-c6a7"
+                servicePort: 8000
