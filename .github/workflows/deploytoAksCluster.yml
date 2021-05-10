@@ -1,0 +1,51 @@
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: fbmondayacr.azurecr.io
+        username: ${{ secrets.acr_fbmondayacr_username }}
+        password: ${{ secrets.acr_fbmondayacr_password }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/" -f  "Dockerfile" -t fbmondayacr.azurecr.io/fbmondayaks:${{ github.sha }} --label dockerfile-path=Dockerfile
+        docker push fbmondayacr.azurecr.io/fbmondayaks:${{ github.sha }}
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.aks_fbmondayaks_kubeConfig }}
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep default | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace default`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: default
+        container-registry-url: fbmondayacr.azurecr.io
+        container-registry-username: ${{ secrets.acr_fbmondayacr_username }}
+        container-registry-password: ${{ secrets.acr_fbmondayacr_password }}
+        secret-name: fbmondayaksdockerauth
+       
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        namespace: default
+        manifests: |
+          manifests/deployment.yml
+          manifests/service.yml
+          manifests/ingress.yml
+        images: |
+          fbmondayacr.azurecr.io/fbmondayaks:${{ github.sha }}
+        imagepullsecrets: |
+          fbmondayaksdockerauth
