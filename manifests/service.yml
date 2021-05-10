@@ -5,9 +5,9 @@ metadata:
     labels:
         app: "fbmondayaks-c6a7"
 spec:
-    type: ClusterIP
+    type: LoadBalancer
     ports:
-    - port: 8000
+    - port: 80
       targetPort: 8000
       protocol: TCP
       name: http
