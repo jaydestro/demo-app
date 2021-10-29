@@ -13,7 +13,7 @@ variable "terraform_storage_account" {
 variable "environment" {
   type        = string
   description = "The environment (dev, test, prod...)"
-  default     = "prod"
+  default     = "env-prod"
 }
 
 variable "location" {
