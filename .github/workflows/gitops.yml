@@ -10,7 +10,7 @@ name: GitOps
 on:
   push:
     branches:
-      - 'env-*'
+      - 'main'
 
 env:
   NODEJS_VERSION: '14'
