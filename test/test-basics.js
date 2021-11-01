@@ -5,14 +5,14 @@ var server = require('../app.js');
 
 describe('/', function () {
   it('should return 200', function (done) {
-    http.get('http://localhost:8000', function (res) {
+    http.get('http://localhost:8080', function (res) {
       assert.equal(200, res.statusCode);
       done();
     });
   });
 
   it('should say "Hello World!"', function (done) {
-    http.get('http://localhost:8000', function (res) {
+    http.get('http://localhost:8080', function (res) {
       var data = '';
 
       res.on('data', function (chunk) {
