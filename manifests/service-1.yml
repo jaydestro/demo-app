@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: "aksdemojagord-8bce"
+    labels:
+        app: "aksdemojagord-8bce"
+spec:
+    type: ClusterIP
+    ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+    selector:
+        app: "aksdemojagord-8bce"
