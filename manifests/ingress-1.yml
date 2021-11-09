@@ -7,11 +7,11 @@ metadata:
     annotations:
         kubernetes.io/ingress.class: addon-http-application-routing
 spec:
-    rules:
-        - host: aksdemojagordb59b-aksdemojagord-8bce.baa61115c8e845018abf.eastus.aksapp.io
-          http:
-            paths:
-            - path: /
-              backend:
-                serviceName: "aksdemojagord-8bce"
-                servicePort: 8080
+    type: LoadBalancer
+    ports:
+    - port: 80
+      targetPort: 8000
+      protocol: TCP
+      name: http
+    selector:
+        app: "aksdemojagord-8bce"
