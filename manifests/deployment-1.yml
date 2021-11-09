@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "aksdemojagord-8bce"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "aksdemojagord-8bce"
+  template:
+    metadata:
+      labels:
+        app: "aksdemojagord-8bce"
+    spec:
+      containers:
+        - name: "aksdemojagord-8bce"
+          image: "acrjagord.azurecr.io/aksdemojagord"
+          ports:
+          - containerPort: 8080
