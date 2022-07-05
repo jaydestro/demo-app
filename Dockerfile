@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-ENV stens_token=1234567890987654321
+ENV stens_token=1234567890987654321234567890
 
 RUN npm install
 # If you are building your code for production
