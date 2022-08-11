@@ -1,3 +1,6 @@
+var assert = require('assert'),
+http = require('http');
+
 var server = require('../app.js');
 
 describe('/', function () {
