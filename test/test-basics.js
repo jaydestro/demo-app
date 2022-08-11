@@ -1,6 +1,3 @@
-var assert = require('assert'),
-    http = require('http');
-
 var server = require('../app.js');
 
 describe('/', function () {
@@ -11,7 +8,7 @@ describe('/', function () {
     });
   });
 
-  it('should say "Hello World!"', function (done) {
+  it('should return "Hello World!"', function (done) {
     http.get('http://localhost:8080', function (res) {
       var data = '';
 
