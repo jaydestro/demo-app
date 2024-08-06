@@ -1,0 +1,31 @@
+name: Sync CODEOWNERS to DevOps Repo
+
+on:
+  push:
+    paths:
+      - CODEOWNERS
+
+jobs:
+  sync-codeowners:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Repository
+        uses: actions/checkout@v2
+
+      - name: Sync CODEOWNERS to DevOps Repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.TARGET_REPOS_PAT }}
+        run: |
+          # Clone the devops repo
+          git clone https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/edwinkullu/Terraform.git
+
+          # Copy CODEOWNERS to the devops repo
+          cp CODEOWNERS Terraform/.github/CODEOWNERS
+
+          cd devops-repo
+          git add .github/CODEOWNERS
+          git commit -m "Update CODEOWNERS from repo2"
+          git push
+          cd ..
+          rm -rf devops-repo

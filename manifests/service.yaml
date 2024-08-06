@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-app
+  namespace: namespace-workflow-1685611537556
+spec:
+  type: LoadBalancer
+  selector:
+    app: demo-app
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
